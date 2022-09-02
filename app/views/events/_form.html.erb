@@ -1,0 +1,91 @@
+<div class="col-lg-9 mx-sm-auto">
+<%= form_with model: @event do |form| %>
+  <div class="form-group">
+    <%= form.label :title %><br>
+    <%= form.text_field :title, class:"form-control" %>
+    <% @event.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :description %><br>
+    <%= form.text_area :description, class:"form-control" %>
+    <% @event.errors.full_messages_for(:description).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+ 
+  <div class="form-group">
+    <%= form.label :venue %><br>
+    <%= form.text_field :venue, class:"form-control" %>
+    <% @event.errors.full_messages_for(:venue).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <%# <div class="form-group">
+    <%= form.label :type %>
+    <%# <%= form.select :event_type, [ 'Bootcamp','Contest','Workshop','Webinar' ], :prompt => 'Select One', class:"form-control" %>
+  <%# </div> %>
+
+  <div class="form-group">
+    <%= form.label :type %><br>
+    <%= form.select :event_type, options_for_select([
+    "Bootcamp", 
+    "Contest", 
+    "Workshop", 
+    "Webinar"]), {}, { class: "form-control" } %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :"Start Date" %><br>
+    <%= form.datetime_field :start_date, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :"End Date" %><br>
+    <%# <%= form.datetime_select :end_date %> 
+    <%= form.datetime_field :end_date, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %> 
+  </div>
+
+  <div class="form-group">
+    <%= form.label :"Registration Start Date" %><br>
+    <%= form.datetime_field :reg_start_date, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>
+  </div>
+ 
+  <div class="form-group">
+    <%= form.label :"Registration End Date" %><br>
+    <%# <%= form.datetime_select :end_date %> 
+    <%= form.datetime_field :reg_end_date, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %> 
+  </div>
+  
+  
+  <div class="form-group">
+    <%= form.label :fees %><br>
+    <%= form.number_field :fee, class:"form-control" %>
+    <% @event.errors.full_messages_for(:venue).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :image_url %><br>
+    <%= form.text_field :image_url, class:"form-control" %>
+    <% @event.errors.full_messages_for(:venue).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :tags%>
+    <%= form.text_field :tags, value: @event.tags.map(&:name).join(","), class:"form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit nil, class: 'btn btn-success' %>
+  </div>
+
+  
+<% end %>
+</div>
